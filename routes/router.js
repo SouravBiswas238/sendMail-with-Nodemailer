@@ -7,24 +7,22 @@ const nodemailer = require("nodemailer");
 
 // send mail
 router.post("/register", (req, res) => {
-    console.log(req.body)
-    const { email, subject } = req.body;
-
+    const { user, pass } = req.body;
 
     try {
 
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
-                user: process.env.USER_EMAIL,
-                pass: process.env.USER_PASS,
+                user: user?.email,
+                pass: pass,
             }
         });
 
         const mailOptions = {
-            from: process.env.EMAIL,
-            to: email,
-            subject: subject,
+            from: user?.email,
+            to: 'souravbiswas427@gmail.com, sourav202030@gmail.com',
+            subject: 'This is msg from nodemailer',
             html: '<h1>Congratulation</h1> <h1> You successfully sent Email </h2>'
         };
 
@@ -38,7 +36,7 @@ router.post("/register", (req, res) => {
         })
 
     } catch (error) {
-        console.log("Error" + error);
+        console.log("Error 1" + error);
         res.status(401).json({ status: 401, error })
     }
 });

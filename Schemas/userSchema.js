@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
     },
 
     user: {
-        type: Object,
+        type: String,
         default: '',
     },
     pass: {

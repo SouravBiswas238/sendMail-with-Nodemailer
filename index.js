@@ -13,12 +13,7 @@ app.use(cors())
 // Connect Database with mongoose
 require('./database');
 
-const cron = require('node-cron');
 
-
-cron.schedule('* * * * *', function () {
-    console.log('running a task every minute');
-});
 
 app.use(router);
 

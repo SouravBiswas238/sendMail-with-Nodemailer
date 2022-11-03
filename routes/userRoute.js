@@ -1,17 +1,16 @@
-const express = require("express");
-const userRoute = express.Router();
-const nodemailer = require("nodemailer");
+const express = require('express');
+const { postUserInfo, getAllUser } = require('../controller/userControler');
+const router = express.Router();
 
 
 
 
-// send mail
-router.post("/user", (req, res) => {
-    console.log(req.body)
-    const { user } = req.body;
+// post user info
+router.post('/', postUserInfo);
 
-    console.log(user);
-});
+router.get('/', getAllUser);
 
 
-module.exports = userRoute;
+
+
+module.exports = router;

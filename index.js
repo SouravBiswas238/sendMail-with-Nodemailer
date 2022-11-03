@@ -2,20 +2,29 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const app = express();
-const router = require("./routes/router")
+const router = require("./routes/router");
+const userRoute = require('./routes/userRoute');
+
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors())
 
+// Connect Database with mongoose
+require('./database');
+
+const cron = require('node-cron');
+
+
+cron.schedule('* * * * *', function () {
+    console.log('running a task every minute');
+});
 
 app.use(router);
 
+app.use('/user', userRoute);
 
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
